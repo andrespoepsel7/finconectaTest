@@ -5,6 +5,7 @@ import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
 import { MdMenu, MdHome, MdConnectedTv } from 'react-icons/md'
 import { FaDatabase } from "react-icons/fa6"
+import { FaUserAlt } from "react-icons/fa";
 
 export default function Header() {
 
@@ -39,6 +40,7 @@ export default function Header() {
             <p onClick={()=>navigate('/')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>Home</p>
             <p onClick={()=>navigate('/api')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>API</p>
             <p onClick={()=>navigate('/crud')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>CRUD</p>
+            <p onClick={()=>navigate('/authenticate')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>Authenticate</p>
           </div>
         </div>
       </WebComponent>
@@ -92,6 +94,16 @@ export default function Header() {
                   >
                     <FaDatabase className='w-[18px] h-[18px]'/>
                     <p className='ml-2'>CRUD</p>
+                  </div>
+                  <div 
+                    className='flex flex-row items-center justify-start py-2 px-4 cursor-pointer hover:bg-slate-900 hover:text-white'
+                    onClick={()=>{
+                        setModal(false)
+                        navigate('/authenticate')
+                    }}
+                  >
+                    <FaUserAlt className='w-[18px] h-[18px]'/>
+                    <p className='ml-2'>Authenticate</p>
                   </div>
                 </div>
               </div>

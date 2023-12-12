@@ -7,6 +7,7 @@ import EditBook from './components/pages/EditBook';
 import ShowBook from "./components/pages/ShowBook";
 import Crud from "./components/pages/Crud";
 import Api from "./components/pages/Api";
+import Authenticate from "./components/pages/Authenticate";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/crud" element={<Crud/>}/>
         <Route path="/api" element={<Api/>}/>
+        <Route path="/authenticate" element={<Authenticate/>}/>
         <Route path="/create_book" element={<CreateBook/>}/>
         <Route path="/delete_book/:id" element={<DeleteBook/>}/>
         <Route path="/edit_book/:id" element={<EditBook/>}/>
