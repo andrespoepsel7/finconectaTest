@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
+import { UserContext } from '../../context/userContext'
 import WebComponent from './WebComponent'
 import MobileComponent from './MobileComponent'
 import logo from '../../assets/logo.png'
@@ -10,8 +11,13 @@ import { FaUserAlt } from "react-icons/fa";
 export default function Header() {
 
   const navigate = useNavigate()
+
+  const {user, logOut} = useContext(UserContext)
+  console.log("user from header", user)
   // States
   const [modal, setModal] = useState(false)
+
+  
 
   // Modal
   const mobileMenuRef = useRef(null)
@@ -37,10 +43,20 @@ export default function Header() {
             <p className='text-[11px] text-slate-900'>Test - Andrés Poepsel Vásquez</p>
           </div>
           <div className='flex flex-row items-center justify-center space-x-5'>
+            {user &&
+              <div className='flex flex-row items-center'>
+              <FaUserAlt className='w-[25px] h-[25px] fill-blue-700 mr-2'/>
+                <p className='text-xl font-bold text-blue-700'>{user.name}</p>
+              </div>
+            }
             <p onClick={()=>navigate('/')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>Home</p>
             <p onClick={()=>navigate('/api')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>API</p>
             <p onClick={()=>navigate('/crud')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>CRUD</p>
-            <p onClick={()=>navigate('/authenticate')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>Authenticate</p>
+            {user ?
+              <p onClick={()=>logOut()} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>Sign Out</p>
+              :
+              <p onClick={()=>navigate('/authenticate')} className='text-xl font-bold text-blue-700 hover:underline cursor-pointer hover:scale-110'>Authenticate</p>
+            }
           </div>
         </div>
       </WebComponent>

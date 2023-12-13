@@ -8,7 +8,7 @@ export default function LandingPage() {
     <>
       <WebComponent>
         <FullScreenDiv>
-          <div className='w-full full-grow flex flex-col px-[10%]'>
+          <div className='w-full full-grow flex flex-col px-[10%] pb-[50px]'>
             <p className='text-blue-700 font-bold text-3xl mt-8'>Summary:</p>
             <p className='text-blue-700 text-xl mt-4'>HTML, CSS, JAVASCRIPT</p>
             <p className='mt-1 text-justify'>
