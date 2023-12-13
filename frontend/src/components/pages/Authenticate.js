@@ -3,17 +3,14 @@ import { UserContext } from '../../context/userContext.js'
 import WebComponent from '../reusable/WebComponent'
 import MobileComponent from '../reusable/MobileComponent'
 import FullScreenDiv from '../reusable/FullScreenDiv'
-import axios from 'axios'
-import {apiUrl} from '../../utils/Urls.js'
 import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
+
 
 export default function Authenticate() {
 
   const navigate = useNavigate()
 
-  const {user} = useContext(UserContext)
-  console.log(user)
+  const {signUp, logIn} = useContext(UserContext)
 
   //States
   // login, signup
@@ -32,89 +29,15 @@ export default function Authenticate() {
   const handleSignup = async(e) => {
     e.preventDefault()
     console.log(signupForm)
-    axios
-      .post(`${apiUrl}/auth/register`, signupForm,  {withCredentials:true})
-      .then((response)=>{
-        console.log(response)
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        }).fire({
-            icon:'success',
-            title:'Success!',
-            text:"User created succesfully!"
-        })
-        setAuthenticate('login')
-      })
-      .catch((error)=>{
-        console.log('Error', error)
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        }).fire({
-            icon:'error',
-            title:'Error!',
-            text:"Please try again!"
-        })
-      })
+    await signUp(signupForm)
+    setAuthenticate('login')
   }
 
   const handleLogin = async(e) => {
     e.preventDefault()
     console.log(loginForm)
-    axios
-      .post(`${apiUrl}/auth/login`, loginForm,  {withCredentials:true})
-      .then((response)=>{
-        console.log(response)
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        }).fire({
-            icon:'success',
-            title:'Success!',
-            text:"Log In succesfull!"
-        })
-        navigate('/')
-      })
-      .catch((error)=>{
-        console.log('Error', error)
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        }).fire({
-            icon:'error',
-            title:'Error!',
-            text:"Error logging in!"
-        })
-      })
+    await logIn(loginForm)
+    navigate('/')
      
   }
 
